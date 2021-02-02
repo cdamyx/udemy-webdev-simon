@@ -22,9 +22,17 @@ $('.btn').click(function(){
 	// alert(userChosenColor);
 	// console.log(userClickedPattern);
 	playSound(userChosenColor);
+	animatePress(userChosenColor);
 });
 
 function playSound(name) {
 	var audio = new Audio("sounds/" + name + ".mp3");
 	audio.play();
+}
+
+function animatePress(currentColor) {
+	$("#" + currentColor).addClass("pressed");
+	setTimeout(function(){
+		$("#" + currentColor).removeClass("pressed");
+	}, 100);
 }
