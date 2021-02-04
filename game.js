@@ -1,6 +1,8 @@
 var buttonColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
+var started = 0;
+var level = 0;
 
 //choose random color, flash button, play sound
 function nextSequence() {
@@ -8,11 +10,9 @@ function nextSequence() {
 	var randomChosenColor = buttonColors[randomNumber];
 	gamePattern.push(randomChosenColor);
 	$("#"+randomChosenColor).fadeOut(100).fadeIn(100);
-
-	// var audio = new Audio("sounds/" + randomChosenColor + ".mp3");
-	// audio.play();
-
 	playSound(randomChosenColor);
+	level++;
+	$("#level-title").html("Level " + level);
 
 }
 //user click button, save into array
@@ -36,3 +36,12 @@ function animatePress(currentColor) {
 		$("#" + currentColor).removeClass("pressed");
 	}, 100);
 }
+
+$(document).keypress(function() {
+	if(started == 0) {
+		nextSequence();
+		started = 1;
+		$("#level-title").html("Level " + level);
+	}
+	
+});
